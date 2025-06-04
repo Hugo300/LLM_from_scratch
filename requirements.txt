@@ -1,0 +1,11 @@
+numpy>=1.26, <2.1
+pandas>=2.2.1
+matplotlib>=3.7.1
+
+torch>=2.3.0
+transformers>=4.33.2
+tqdm >= 4.66.1
+tiktoken>=0.5.1
+psutil >= 5.9.5
+
+jupyterlab>=4.0
