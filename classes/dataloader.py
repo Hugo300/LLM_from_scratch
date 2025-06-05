@@ -23,13 +23,10 @@ class LLMDataset(Dataset):
     
 
 def create_dataloader(
-        text, batch_size=4, max_length=256, 
+        text, tokenizer, batch_size=4, max_length=256, 
         stride=128, shuffle=True, 
         drop_last=True, num_workers=0
     ):
-
-    # get tokenizer
-    tokenizer = tiktoken.get_encoding("gpt2")
 
     # create the dataset
     dataset = LLMDataset(text, tokenizer, max_length, stride)
