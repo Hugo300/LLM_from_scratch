@@ -33,9 +33,6 @@ class GPTModel(nn.Module):
 
         logits = self.output_layer(x)
         return logits
-
-    def backward(self):
-        pass
     
 
 class LayerNormalization(nn.Module):
