@@ -4,6 +4,7 @@ import torch.nn as nn
 from classes.attention import MultiHeadAttention
 from classes.activation import GELU
 
+
 class GPTModel(nn.Module):
     def __init__(self, cfg):
         super().__init__()
@@ -51,6 +52,7 @@ class LayerNormalization(nn.Module):
 
         norm_x = (x - mean) / torch.sqrt(var + self.eps)
         return self.scale * norm_x + self.shift    
+
 
 # Feed Forward (the basic building block for the transformer block)
 class FeedForward(nn.Module):
