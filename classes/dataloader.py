@@ -40,4 +40,4 @@ def create_dataloader(
         num_workers=num_workers
     )
 
-    return dataloader, tokenizer.n_vocab
+    return dataloader
