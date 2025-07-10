@@ -90,7 +90,7 @@ class InstructionDataset(Dataset):
             )
 
     # this is based on a older, more widespread approach
-    def format_input(entry):
+    def format_input(self, entry):
         instruction_text = (
             f"Below is an instruction that describes a task. "
             f"Write a response that appropriately completes the request."
