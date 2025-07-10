@@ -116,6 +116,38 @@ class generator():
             idx = torch.cat((idx, new_idx), dim=1)
 
         return idx
+    
+    def generate_text_input_text(self, text, max_new_tokens, temperature=0.0, topk=None, eos_id=None):
+        idx = self.encoder.encode(text)
+
+        for _ in range(max_new_tokens):
+            context = idx[:, -self.context_size:]
+
+            with torch.no_grad():
+                logits = self.model(context)
+            
+            # get only the last logit set
+            logits = logits[:, -1, :]
+
+            if not topk is None:
+                logits = self.topk_sample(logits, topk)
+
+            if temperature > 0:
+                logits = self.temperature_scalling(logits, temperature)
+
+                prob = torch.softmax(logits, dim=-1)
+                new_idx = torch.multinomial(prob, num_samples=1)
+            else:
+                prob = torch.softmax(logits, dim=-1)
+                new_idx = torch.argmax(prob, dim=-1, keepdim=True)
+
+            # Indicates when the llm should stop generating
+            if new_idx == eos_id:
+                break
+
+            idx = torch.cat((idx, new_idx), dim=1)
+
+        return idx
 
 
     def generate_and_print(self, start_context, num_gen_tokens, method, device, **kwargs):
